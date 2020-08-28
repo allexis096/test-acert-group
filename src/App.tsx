@@ -1,7 +1,9 @@
 import React from 'react';
 
-function App() {
-  return <h1>Hello World</h1>;
-}
+import Dashboard from './pages/Dashboard';
+
+const App: React.FC = () => {
+  return <Dashboard />;
+};
 
 export default App;
