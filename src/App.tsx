@@ -2,8 +2,15 @@ import React from 'react';
 
 import Dashboard from './pages/Dashboard';
 
+import GlobalStyles from './assets/styles/global';
+
 const App: React.FC = () => {
-  return <Dashboard />;
+  return (
+    <>
+      <Dashboard />
+      <GlobalStyles />
+    </>
+  );
 };
 
 export default App;
