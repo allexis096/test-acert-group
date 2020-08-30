@@ -9,19 +9,19 @@ export const Container = styled.div`
 
 export const Dogs = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: row;
   overflow-y: auto;
   width: 100%;
-`;
 
-export const DogCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 10px;
+  form {
+    fieldset {
+      border: none;
 
-  img {
-    width: 220px;
-    height: 180px;
+      label {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 `;
