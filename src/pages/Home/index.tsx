@@ -4,27 +4,49 @@ import dogImg from '../../assets/pinscher.jpg';
 
 import { Container, Dogs, DogCard } from './styles';
 
-// import api from '../../services/api';
+import api from '../../services/api';
+
+// interface Request {
+//   message: string[];
+// }
 
 const Dashboard: React.FC = () => {
-  // const [dog, setDog] = useState([]);
+  const [dogs, setDogs] = useState<string[]>([]);
 
-  // useEffect(() => {
-  //   const dogList = async (): Promise<void> => {
-  //     const response = await api.get('list/all');
+  useEffect(() => {
+    const dogList = async (): Promise<void> => {
+      const response = await api.get('list/all');
 
-  //     setDog(response.data.message);
-  //   };
+      // const test = [];
 
-  //   dogList();
-  // }, []);
+      const keys = Object.keys(response.data.message);
+
+      // keys.forEach((key) => test.push(key));
+
+      // console.log(keys);
+
+      // test.push(response.data.message);
+
+      // console.log(keys);
+
+      setDogs(keys);
+    };
+
+    dogList();
+  }, []);
 
   return (
     <Container>
       <h1>Select a breed:</h1>
 
       <Dogs>
-        <DogCard>
+        {dogs.map((dog) => (
+          <DogCard key={dog}>
+            <img src={dogImg} alt="" />
+            <span>{dog}</span>
+          </DogCard>
+        ))}
+        {/* <DogCard>
           <img src={dogImg} alt="" />
           <span>Pinscher</span>
         </DogCard>
@@ -55,11 +77,7 @@ const Dashboard: React.FC = () => {
         <DogCard>
           <img src={dogImg} alt="" />
           <span>Pinscher</span>
-        </DogCard>
-        <DogCard>
-          <img src={dogImg} alt="" />
-          <span>Pinscher</span>
-        </DogCard>
+        </DogCard> */}
       </Dogs>
     </Container>
   );
