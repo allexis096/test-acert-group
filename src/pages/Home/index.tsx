@@ -6,30 +6,21 @@ import { Container, Dogs, DogCard } from './styles';
 
 import api from '../../services/api';
 
-// interface Request {
-//   message: string[];
-// }
-
 const Dashboard: React.FC = () => {
   const [dogs, setDogs] = useState<string[]>([]);
 
   useEffect(() => {
     const dogList = async (): Promise<void> => {
-      const response = await api.get('list/all');
+      const response = await api.get('breeds/list/all');
 
-      // const test = [];
+      const listDogs = Object.keys(response.data.message);
 
-      const keys = Object.keys(response.data.message);
+      const test = listDogs.map(async (dog) => {
+        const responseList = await api.get(`breed/${dog}/images`);
+        console.log(responseList.data.message[Math.floor(Math.random())]);
+      });
 
-      // keys.forEach((key) => test.push(key));
-
-      // console.log(keys);
-
-      // test.push(response.data.message);
-
-      // console.log(keys);
-
-      setDogs(keys);
+      setDogs(listDogs);
     };
 
     dogList();
@@ -46,38 +37,6 @@ const Dashboard: React.FC = () => {
             <span>{dog}</span>
           </DogCard>
         ))}
-        {/* <DogCard>
-          <img src={dogImg} alt="" />
-          <span>Pinscher</span>
-        </DogCard>
-        <DogCard>
-          <img src={dogImg} alt="" />
-          <span>Pinscher</span>
-        </DogCard>
-        <DogCard>
-          <img src={dogImg} alt="" />
-          <span>Pinscher</span>
-        </DogCard>
-        <DogCard>
-          <img src={dogImg} alt="" />
-          <span>Pinscher</span>
-        </DogCard>
-        <DogCard>
-          <img src={dogImg} alt="" />
-          <span>Pinscher</span>
-        </DogCard>
-        <DogCard>
-          <img src={dogImg} alt="" />
-          <span>Pinscher</span>
-        </DogCard>
-        <DogCard>
-          <img src={dogImg} alt="" />
-          <span>Pinscher</span>
-        </DogCard>
-        <DogCard>
-          <img src={dogImg} alt="" />
-          <span>Pinscher</span>
-        </DogCard> */}
       </Dogs>
     </Container>
   );
